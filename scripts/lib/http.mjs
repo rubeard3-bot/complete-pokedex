@@ -5,10 +5,14 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export async function fetchWithRetry(url, { attempts = 4, asBuffer = false } = {}) {
   let delay = 500;
+  let bustCache = false;
   for (let attempt = 1; ; attempt++) {
+    // CDNs sometimes cache an upstream 5xx; a throwaway query param makes the
+    // retry fetch a fresh copy instead of replaying the poisoned cache entry.
+    const attemptUrl = bustCache ? `${url}${url.includes('?') ? '&' : '?'}cb=${Date.now()}` : url;
     let res;
     try {
-      res = await fetch(url, { headers: { 'user-agent': 'local-pokedex-builder/1.0' } });
+      res = await fetch(attemptUrl, { headers: { 'user-agent': 'local-pokedex-builder/1.0' } });
     } catch (err) {
       if (attempt >= attempts) throw new Error(`network error for ${url}: ${err.message}`);
       await sleep(delay + Math.random() * 250);
@@ -17,6 +21,7 @@ export async function fetchWithRetry(url, { attempts = 4, asBuffer = false } = {
     }
     if (res.status === 404) return { notFound: true };
     if (res.status === 429 || res.status >= 500) {
+      if (res.status >= 500) bustCache = true;
       if (attempt >= attempts) throw new Error(`HTTP ${res.status} for ${url}`);
       const retryAfter = Number(res.headers.get('retry-after')) || 0;
       await sleep(retryAfter ? retryAfter * 1000 : delay + Math.random() * 250);
