@@ -1,0 +1,63 @@
+name: Weekly card price refresh
+
+on:
+  schedule:
+    # Sundays 07:00 UTC (~2-3 AM US Eastern)
+    - cron: '0 7 * * 0'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: price-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # The pipeline resumes from .cache/ if a previous run was interrupted,
+      # and PokéAPI responses stay valid between weeks — only card prices
+      # are force-refreshed below.
+      - name: Restore API cache
+        uses: actions/cache@v4
+        with:
+          path: .cache
+          key: api-cache-${{ github.run_id }}
+          restore-keys: |
+            api-cache-
+
+      - name: Refresh card prices
+        run: npm run update-data -- --refresh-prices
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data public/sprites scripts/last-run-report.json
+          if git diff --cached --quiet; then
+            echo "No price changes this week."
+          else
+            git commit -m "chore: weekly card price refresh"
+            git push
+          fi
+
+      - name: Upload run report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: last-run-report
+          path: scripts/last-run-report.json
+          if-no-files-found: ignore
