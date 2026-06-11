@@ -1,0 +1,152 @@
+{
+  "generatedAt": "2026-06-11T04:27:58.963Z",
+  "pokemonWritten": 1025,
+  "megaFormCount": 96,
+  "generationCounts": {
+    "1": 151,
+    "2": 100,
+    "3": 135,
+    "4": 107,
+    "5": 156,
+    "6": 72,
+    "7": 88,
+    "8": 96,
+    "9": 120
+  },
+  "generationMismatches": [],
+  "fanFavoritesResolved": 30,
+  "excludedCardCount": 50,
+  "topExcludedTokens": [
+    {
+      "token": "spirit",
+      "count": 35,
+      "samples": [
+        "Ampharos Spirit Link",
+        "Blastoise Spirit Link",
+        "Charizard Spirit Link"
+      ]
+    },
+    {
+      "token": "link",
+      "count": 35,
+      "samples": [
+        "Ampharos Spirit Link",
+        "Blastoise Spirit Link",
+        "Charizard Spirit Link"
+      ]
+    },
+    {
+      "token": "dex",
+      "count": 4,
+      "samples": [
+        "Rotom Dex—Poké Finder Mode",
+        "Rotom Dex"
+      ]
+    },
+    {
+      "token": "bike",
+      "count": 2,
+      "samples": [
+        "Rotom Bike"
+      ]
+    },
+    {
+      "token": "bag",
+      "count": 2,
+      "samples": [
+        "Eevee Bag"
+      ]
+    },
+    {
+      "token": "doll",
+      "count": 2,
+      "samples": [
+        "Clefairy Doll",
+        "Snorlax Doll"
+      ]
+    },
+    {
+      "token": "phone",
+      "count": 1,
+      "samples": [
+        "Rotom Phone"
+      ]
+    },
+    {
+      "token": "ange",
+      "count": 1,
+      "samples": [
+        "Ange Floette"
+      ]
+    },
+    {
+      "token": "imakuni",
+      "count": 1,
+      "samples": [
+        "Imakuni?'s Doduo"
+      ]
+    },
+    {
+      "token": "poke",
+      "count": 1,
+      "samples": [
+        "Rotom Dex—Poké Finder Mode"
+      ]
+    },
+    {
+      "token": "finder",
+      "count": 1,
+      "samples": [
+        "Rotom Dex—Poké Finder Mode"
+      ]
+    },
+    {
+      "token": "mode",
+      "count": 1,
+      "samples": [
+        "Rotom Dex—Poké Finder Mode"
+      ]
+    },
+    {
+      "token": "drone",
+      "count": 1,
+      "samples": [
+        "Drone Rotom"
+      ]
+    },
+    {
+      "token": "friends",
+      "count": 1,
+      "samples": [
+        "Terapagos & Friends"
+      ]
+    }
+  ],
+  "speciesWithFewCards": [
+    {
+      "id": 438,
+      "name": "Bonsly",
+      "cards": 2
+    },
+    {
+      "id": 891,
+      "name": "Kubfu",
+      "cards": 1
+    },
+    {
+      "id": 896,
+      "name": "Glastrier",
+      "cards": 2
+    },
+    {
+      "id": 897,
+      "name": "Spectrier",
+      "cards": 2
+    },
+    {
+      "id": 904,
+      "name": "Overqwil",
+      "cards": 2
+    }
+  ]
+}
