@@ -72,6 +72,9 @@ jobs:
             echo "No price changes this week."
           else
             git commit -m "chore: weekly card price refresh"
+            # main may have moved during the hour-long run; replay our
+            # data commit on top of whatever is there now
+            git pull --rebase origin main
             git push
           fi
 
