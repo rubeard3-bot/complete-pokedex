@@ -23,7 +23,9 @@ export async function fetchCardDetails(cardIds, cacheDir, { refreshPrices = fals
       const detail = await cachedFetchJson(
         `${API}/cards/${encodeURIComponent(cardId)}`,
         path.join(cacheDir, 'tcgdex', 'card', `${sanitizeId(cardId)}.json`),
-        { maxAgeMs: refreshPrices ? 0 : 7 * DAY, force }
+        // refreshPrices means newer-than-12h rather than always-refetch, so an
+        // interrupted run can resume instead of re-fetching ~20k cards.
+        { maxAgeMs: refreshPrices ? DAY / 2 : 7 * DAY, force }
       );
       if (!detail.__notFound) details.set(cardId, detail);
     },

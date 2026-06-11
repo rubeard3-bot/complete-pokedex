@@ -30,17 +30,38 @@ jobs:
 
       # The pipeline resumes from .cache/ if a previous run was interrupted,
       # and PokéAPI responses stay valid between weeks — only card prices
-      # are force-refreshed below.
+      # are force-refreshed below. restore/save are split so the cache is
+      # saved even when the job fails (the combined action skips saving on
+      # failure, which would lose all progress from a partial run).
       - name: Restore API cache
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: .cache
           key: api-cache-${{ github.run_id }}
           restore-keys: |
             api-cache-
 
+      # Transient upstream 5xx errors (PokéAPI/TCGdex hiccups) fail a single
+      # pipeline pass; each retry resumes from .cache/, so only the failed
+      # items are re-fetched.
       - name: Refresh card prices
-        run: npm run update-data -- --refresh-prices
+        run: |
+          for attempt in 1 2 3; do
+            if npm run update-data -- --refresh-prices; then
+              exit 0
+            fi
+            echo "::warning::Pipeline attempt ${attempt} failed; retrying in 90s..."
+            sleep 90
+          done
+          echo "::error::Pipeline failed after 3 attempts"
+          exit 1
+
+      - name: Save API cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .cache
+          key: api-cache-${{ github.run_id }}
 
       - name: Commit updated data
         run: |
