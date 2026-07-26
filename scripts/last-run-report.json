@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-19T09:06:04.307Z",
+  "generatedAt": "2026-07-26T09:10:45.506Z",
   "pokemonWritten": 1025,
-  "megaFormCount": 96,
+  "megaFormCount": 97,
   "generationCounts": {
     "1": 151,
     "2": 100,
@@ -15,7 +15,7 @@
   },
   "generationMismatches": [],
   "fanFavoritesResolved": 30,
-  "excludedCardCount": 50,
+  "excludedCardCount": 51,
   "topExcludedTokens": [
     {
       "token": "spirit",
@@ -63,6 +63,13 @@
       "samples": [
         "Clefairy Doll",
         "Snorlax Doll"
+      ]
+    },
+    {
+      "token": "ancient",
+      "count": 1,
+      "samples": [
+        "Ancient Mew"
       ]
     },
     {
