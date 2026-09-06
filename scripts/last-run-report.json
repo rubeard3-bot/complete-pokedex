@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-23T07:29:28.006Z",
+  "generatedAt": "2026-09-06T11:32:37.027Z",
   "pokemonWritten": 1025,
   "megaFormCount": 97,
   "generationCounts": {
@@ -15,7 +15,7 @@
   },
   "generationMismatches": [],
   "fanFavoritesResolved": 30,
-  "excludedCardCount": 51,
+  "excludedCardCount": 74,
   "topExcludedTokens": [
     {
       "token": "spirit",
@@ -33,6 +33,15 @@
         "Ampharos Spirit Link",
         "Blastoise Spirit Link",
         "Charizard Spirit Link"
+      ]
+    },
+    {
+      "token": "e4",
+      "count": 22,
+      "samples": [
+        "Bronzong E4",
+        "Drapion E4",
+        "Espeon E4"
       ]
     },
     {
@@ -126,6 +135,20 @@
       "count": 1,
       "samples": [
         "Terapagos & Friends"
+      ]
+    },
+    {
+      "token": "at",
+      "count": 1,
+      "samples": [
+        "Pikachu at the Museum"
+      ]
+    },
+    {
+      "token": "museum",
+      "count": 1,
+      "samples": [
+        "Pikachu at the Museum"
       ]
     }
   ],
